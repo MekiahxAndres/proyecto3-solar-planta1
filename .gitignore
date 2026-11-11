@@ -1,0 +1,26 @@
+# Datos locales: cada integrante los coloca en datos/.
+datos/*
+!datos/.gitkeep
+*.csv
+*.tsv
+*.parquet
+*.zip
+
+# Entorno, secretos y temporales
+.venv/
+venv/
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+.jupyter/
+.runtime/
+.pytest_cache/
+.DS_Store
+Thumbs.db
+~$*
+
