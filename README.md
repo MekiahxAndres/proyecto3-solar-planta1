@@ -10,7 +10,7 @@ Proyecto/
 ├── datos/          CSV originales y tablas derivadas locales, excluidos de Git
 ├── notebooks/      Proyecto3_Planta1.ipynb: calidad, EDA conjunto y clasificación
 ├── informe/        Informe IEEE en PDF y Word; figuras/tablas en figuras/
-├── presentacion/   Futuras diapositivas en PDF
+├── presentacion/   Diapositivas PDF y guion de sustentación en PDF/Word
 ├── README.md
 ├── requirements.txt
 └── .gitignore
@@ -43,7 +43,15 @@ Al ejecutar se generan **solo localmente**, dentro de `datos/`:
 
 El contexto bibliográfico y las tres preguntas ya están incorporados. El informe IEEE se preparó el 21-nov en cinco páginas: `informe/Informe_Proyecto3_Planta1_IEEE.pdf`, con su fuente editable `.docx`. Incluye resumen de 197 palabras, cuatro términos, cuatro figuras, tabla con los seis métodos/configuraciones, discusión por pregunta, despliegue supervisado y diez referencias con enlaces. Las métricas se contrastaron con las exportadas por el notebook y las cinco páginas se revisaron visualmente.
 
-Se aplicó una maquetación IEEE a dos columnas y las reglas de la guía. No se encontró identificada la plantilla específica del curso: queda pendiente cotejarla cuando esté disponible, junto con la revisión de las decisiones e interpretaciones por los tres integrantes. La auditoría dentro del notebook conserva el estado de su ejecución anterior a redactar el informe. Faltan las diapositivas y el ensayo del equipo. Los resultados simulados de las guías y los del procedimiento de Tabares no se copian como resultados del procedimiento corregido.
+Se aplicó una maquetación IEEE a dos columnas y las reglas de la guía. No se encontró identificada la plantilla específica del curso: queda pendiente cotejarla cuando esté disponible, junto con la revisión de las decisiones e interpretaciones por los tres integrantes. La auditoría dentro del notebook conserva el estado de su ejecución anterior a redactar el informe. Queda pendiente el ensayo del equipo. Los resultados simulados de las guías y los del procedimiento de Tabares no se copian como resultados del procedimiento corregido.
+
+## Diapositivas y guion de sustentación
+
+`presentacion/Sustentacion_Proyecto3_Planta1.pdf` contiene 12 láminas para el recorrido de doce minutos y tres de apoyo para preguntas. Las gráficas se adaptaron con los mismos datos y resultados del informe; la comparación distingue CV de prueba y conserva la postpoda como revisión exploratoria. La presentación editable se guardó en Spaces y está enlazada en el chat de preparación, con las tablas y notas del expositor editables.
+
+El reparto propuesto es Miguel Ángel Tabares, láminas 1–4 (0:00–4:00); Isabella Londoño Lerma, 5–8 (4:00–8:00); Andrés Felipe Rivas, 9–12 (8:00–12:00). El tiempo total objetivo es 720 segundos, con 240 por persona. Debe comprobarse con un ensayo cronometrado.
+
+`presentacion/Guion_Sustentacion_Proyecto3.pdf` reúne el texto de cada intervención, tiempos por lámina, qué señalar, transiciones, diez preguntas de defensa y práctica de cambios en vivo. Su fuente editable es `Guion_Sustentacion_Proyecto3.docx`. El guion tiene siete páginas y es material de preparación; no sustituye los tres productos finales solicitados para el ZIP. Las láminas A1–A3 se consultan únicamente durante las preguntas. Los tres integrantes deben comprender el proyecto completo y revisar lo que van a sustentar.
 
 ## Ejecutar
 
