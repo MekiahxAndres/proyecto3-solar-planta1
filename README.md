@@ -1,6 +1,6 @@
 # Proyecto 3: clasificación solar para apoyar operación y mantenimiento, Planta 1
 
-Analítica de Datos I, Universidad Icesi, 2026-02. Equipo de tres integrantes (nombres pendientes).
+Analítica de Datos I, Universidad Icesi, 2026-02. Miguel Ángel Tabares, Isabella Londoño Lerma y Andrés Felipe Rivas, Ingeniería en Energía Inteligente.
 
 ## Organización
 
@@ -9,7 +9,7 @@ Proyecto/
 ├── consigna/       PDF del proyecto y guías de semanas 2, 3 y 4
 ├── datos/          CSV originales y tablas derivadas locales, excluidos de Git
 ├── notebooks/      Proyecto3_Planta1.ipynb: calidad, EDA conjunto y clasificación
-├── informe/        Figuras/tablas del notebook en figuras/; informe IEEE pendiente
+├── informe/        Informe IEEE en PDF y Word; figuras/tablas en figuras/
 ├── presentacion/   Futuras diapositivas en PDF
 ├── README.md
 ├── requirements.txt
@@ -41,7 +41,9 @@ Al ejecutar se generan **solo localmente**, dentro de `datos/`:
 - `Planta1_crudo_unificado.csv`: 3.264 instantes esperados, sumas observadas, clima, contadores y banderas de origen/calidad/ceros, sin filtrar ni rellenar huecos.
 - `Planta1_tabla_modelado.csv`: objetivos observados completos, predictores pasados, fecha de emisión, partición y nivel con los cortes de entrenamiento.
 
-El contexto bibliográfico y las tres preguntas ya están incorporados. Faltan el informe IEEE en la plantilla del curso, las diapositivas, los nombres para la entrega y el ensayo del equipo. Los resultados simulados de las guías y los del procedimiento de Tabares no se copian como resultados del procedimiento corregido.
+El contexto bibliográfico y las tres preguntas ya están incorporados. El informe IEEE se preparó el 21-nov en cinco páginas: `informe/Informe_Proyecto3_Planta1_IEEE.pdf`, con su fuente editable `.docx`. Incluye resumen de 197 palabras, cuatro términos, cuatro figuras, tabla con los seis métodos/configuraciones, discusión por pregunta, despliegue supervisado y diez referencias con enlaces. Las métricas se contrastaron con las exportadas por el notebook y las cinco páginas se revisaron visualmente.
+
+Se aplicó una maquetación IEEE a dos columnas y las reglas de la guía. No se encontró identificada la plantilla específica del curso: queda pendiente cotejarla cuando esté disponible, junto con la revisión de las decisiones e interpretaciones por los tres integrantes. La auditoría dentro del notebook conserva el estado de su ejecución anterior a redactar el informe. Faltan las diapositivas y el ensayo del equipo. Los resultados simulados de las guías y los del procedimiento de Tabares no se copian como resultados del procedimiento corregido.
 
 ## Ejecutar
 
