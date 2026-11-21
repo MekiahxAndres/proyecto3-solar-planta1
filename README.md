@@ -49,9 +49,11 @@ Se aplicó una maquetación IEEE a dos columnas y las reglas de la guía. No se 
 
 `presentacion/Sustentacion_Proyecto3_Planta1.pdf` contiene 12 láminas para el recorrido de doce minutos y tres de apoyo para preguntas. Las gráficas se adaptaron con los mismos datos y resultados del informe; la comparación distingue CV de prueba y conserva la postpoda como revisión exploratoria. La presentación editable se guardó en Spaces y está enlazada en el chat de preparación, con las tablas y notas del expositor editables.
 
-El reparto propuesto es Miguel Ángel Tabares, láminas 1–4 (0:00–4:00); Isabella Londoño Lerma, 5–8 (4:00–8:00); Andrés Felipe Rivas, 9–12 (8:00–12:00). El tiempo total objetivo es 720 segundos, con 240 por persona. Debe comprobarse con un ensayo cronometrado.
+El reparto es Isabella Londoño Lerma, láminas 1–4 (0:00–4:00); Miguel Ángel Tabares, 5–8 (4:00–8:00); Andrés Felipe Rivas, 9–12 (8:00–12:00). El tiempo total objetivo es 720 segundos, con 240 por persona. Debe comprobarse con un ensayo cronometrado.
 
-`presentacion/Guion_Sustentacion_Proyecto3.pdf` reúne el texto de cada intervención, tiempos por lámina, qué señalar, transiciones, diez preguntas de defensa y práctica de cambios en vivo. Su fuente editable es `Guion_Sustentacion_Proyecto3.docx`. El guion tiene siete páginas y es material de preparación; no sustituye los tres productos finales solicitados para el ZIP. Las láminas A1–A3 se consultan únicamente durante las preguntas. Los tres integrantes deben comprender el proyecto completo y revisar lo que van a sustentar.
+La versión `presentacion/Sustentacion_Proyecto3_Planta1.html` funciona sin internet y contiene 12 láminas principales y tres de apoyo. Abrirla en Chrome o Edge. Flechas para avanzar, N para notas y F para pantalla completa. El reloj inicia o pausa con un clic y reinicia con doble clic. La comparación permite alternar validación/prueba y la matriz alterna porcentajes/conteos. Las animaciones respetan la preferencia de movimiento reducido. El PDF conserva el formato de entrega del curso.
+
+`presentacion/Guion_Sustentacion_Proyecto3_Actualizado.pdf` reúne el reparto vigente, texto de cada intervención, tiempos por lámina, qué señalar, transiciones, diez preguntas de defensa y práctica de cambios en vivo. Su fuente editable es `Guion_Sustentacion_Proyecto3.docx`. El PDF sin sufijo conserva el reparto anterior. El guion tiene siete páginas y es material de preparación; no sustituye los tres productos finales solicitados para el ZIP. Las láminas A1–A3 se consultan únicamente durante las preguntas. Los tres integrantes deben comprender el proyecto completo y revisar lo que van a sustentar.
 
 ## Ejecutar
 
