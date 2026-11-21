@@ -1,0 +1,95 @@
+{
+  "schema":{
+    "fields":[
+      {
+        "name":"modelo",
+        "type":"string",
+        "extDtype":"str"
+      },
+      {
+        "name":"Accuracy",
+        "type":"number"
+      },
+      {
+        "name":"F1 macro",
+        "type":"number"
+      },
+      {
+        "name":"Kappa",
+        "type":"number"
+      },
+      {
+        "name":"F1 bajo",
+        "type":"number"
+      },
+      {
+        "name":"F1 medio",
+        "type":"number"
+      },
+      {
+        "name":"F1 alto",
+        "type":"number"
+      }
+    ],
+    "primaryKey":[
+      "modelo"
+    ],
+    "pandas_version":"1.4.0"
+  },
+  "data":[
+    {
+      "modelo":"Clase mayoritaria",
+      "Accuracy":0.2161290323,
+      "F1 macro":0.1184792219,
+      "Kappa":0.0,
+      "F1 bajo":0.0,
+      "F1 medio":0.0,
+      "F1 alto":0.3554376658
+    },
+    {
+      "modelo":"Persistencia",
+      "Accuracy":0.8032258065,
+      "F1 macro":0.7949166854,
+      "Kappa":0.6948720431,
+      "F1 bajo":0.8859649123,
+      "F1 medio":0.7674418605,
+      "F1 alto":0.7313432836
+    },
+    {
+      "modelo":"Logística",
+      "Accuracy":0.7903225806,
+      "F1 macro":0.7818496258,
+      "Kappa":0.6748636525,
+      "F1 bajo":0.8771929825,
+      "F1 medio":0.7519379845,
+      "F1 alto":0.7164179104
+    },
+    {
+      "modelo":"KNN",
+      "Accuracy":0.7741935484,
+      "F1 macro":0.7704013433,
+      "Kappa":0.658003814,
+      "F1 bajo":0.8767123288,
+      "F1 medio":0.7219917012,
+      "F1 alto":0.7125
+    },
+    {
+      "modelo":"Árbol",
+      "Accuracy":0.735483871,
+      "F1 macro":0.7324069494,
+      "Kappa":0.5978039017,
+      "F1 bajo":0.8401826484,
+      "F1 medio":0.6775510204,
+      "F1 alto":0.6794871795
+    },
+    {
+      "modelo":"Árbol postpodado · revisión",
+      "Accuracy":0.7903225806,
+      "F1 macro":0.7900720159,
+      "Kappa":0.6780687319,
+      "F1 bajo":0.8669950739,
+      "F1 medio":0.7565543071,
+      "F1 alto":0.7466666667
+    }
+  ]
+}
