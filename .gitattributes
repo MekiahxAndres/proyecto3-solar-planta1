@@ -1,0 +1,10 @@
+# Los PDF y documentos deben conservar sus bytes al clonar en Windows.
+*.pdf binary
+*.docx binary
+*.png binary
+*.jpg binary
+*.zip binary
+*.ipynb text eol=lf
+*.html text eol=lf
+*.json text eol=lf
+*.md text eol=lf

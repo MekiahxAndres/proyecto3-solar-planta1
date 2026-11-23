@@ -1,92 +1,148 @@
-# Proyecto 3: clasificación solar para apoyar operación y mantenimiento, Planta 1
+# Proyecto 3 · Clasificación solar para apoyar operación y mantenimiento
 
-Analítica de Datos I, Universidad Icesi, 2026-02. Miguel Ángel Tabares, Isabella Londoño Lerma y Andrés Felipe Rivas, Ingeniería en Energía Inteligente.
+**Analítica de Datos I · Universidad Icesi · 2026-02**
+Miguel Ángel Tabares, Isabella Londoño Lerma y Andrés Felipe Rivas. Ingeniería en Energía Inteligente.
+
+Anticipamos el nivel **bajo, medio o alto de la Planta 1 a 15 minutos**, con información disponible al emitir el pronóstico. La empresa del caso utiliza esa información para valorar periodos de mantenimiento y revisar discrepancias cuando la generación real es inferior a la anunciada.
+
+**Resultado:** persistencia obtuvo F1 macro **0.795**, frente a **0.770** del KNN seleccionado previamente por validación. Los resultados no justifican reemplazar esa línea base. Se propone un **piloto supervisado**, con telemetría comprobada y autorización humana. Una clase baja no diagnostica avería ni garantiza duración suficiente de una ventana de trabajo.
+
+## Dónde empezar
+
+| Archivo | Contenido |
+|---|---|
+| [Notebook](notebooks/Proyecto3_Planta1.ipynb) | Las seis fases CRISP-DM, código, decisiones, tablas y 26 figuras ejecutadas |
+| [Informe IEEE](informe/Informe_Proyecto3_Planta1_IEEE.pdf) | Cinco páginas, resultados, discusión, recomendación, IAG y diez referencias |
+| [Informe editable](informe/Informe_Proyecto3_Planta1_IEEE.docx) | Fuente Word del informe |
+| [Diapositivas PDF](presentacion/Sustentacion_Proyecto3_Planta1.pdf) | 12 láminas principales y tres de apoyo para preguntas |
+| [Presentación HTML](presentacion/Sustentacion_Proyecto3_Planta1.html) | Versión interactiva autónoma, sin internet |
+| [Guion vigente](presentacion/Guion_Sustentacion_Proyecto3_Actualizado.pdf) | Tiempos, intervenciones, preguntas y práctica de cambios en vivo |
+| [Guion editable](presentacion/Guion_Sustentacion_Proyecto3.docx) | Fuente Word con el mismo reparto |
+| [Guía de gráficos](presentacion/Guia_Defensa_Graficos.html) | Explicación de los 26 gráficos reales: ejes, unidades, colores, valores y lectura O&M |
+
+Descargar el HTML y abrirlo en Chrome o Edge. La vista de código de GitHub no ejecuta la presentación. Flechas para navegar, **N** para notas y **F** para pantalla completa. El reloj inicia/pausa con un clic y reinicia con doble clic. La tabla gráfica permite alternar CV/prueba; la matriz, porcentajes/conteos. La fuente editable de las láminas también está guardada en Spaces y enlazada en el chat de preparación.
 
 ## Organización
 
 ```text
 Proyecto/
-├── consigna/       PDF del proyecto y guías de semanas 2, 3 y 4
-├── datos/          CSV originales y tablas derivadas locales, excluidos de Git
-├── notebooks/      Proyecto3_Planta1.ipynb: calidad, EDA conjunto y clasificación
-├── informe/        Informe IEEE en PDF y Word; figuras/tablas en figuras/
-├── presentacion/   Diapositivas PDF y guion de sustentación en PDF/Word
+├── consigna/       Consigna específica y guías de semanas 2, 3 y 4
+├── datos/          CSV originales y dos tablas derivadas; solo locales
+├── notebooks/      Un único notebook final
+├── informe/        PDF, Word y figuras/tablas exportadas en figuras/
+├── presentacion/   PDF, HTML, guion y guía de estudio
 ├── README.md
 ├── requirements.txt
 └── .gitignore
 ```
 
-`.venv/` contiene el entorno Python local y `.vscode/` selecciona el intérprete. Son carpetas de configuración. El análisis, sus gráficas, las decisiones y el registro de IA se concentran en el notebook.
+Se mantienen cinco carpetas de trabajo. `.venv/` es el entorno local y `.vscode/` su configuración. El código analítico se concentra en el notebook; no depende de scripts temporales ni módulos privados.
 
-## Notebook integrado del 21 de noviembre
+## Datos y decisiones metodológicas
 
-Trabajo en la rama `avance/eda-clima-modelado`, separada de `main`. Un solo notebook reúne las seis fases CRISP-DM: contexto con fuentes, tres preguntas analíticas, unión cruda de las dos fuentes, calidad y EDA, preparación, modelado, evaluación y propuesta de uso en O&M. Se mantienen las cinco carpetas de trabajo; las figuras exportadas se agrupan dentro de `informe/figuras/`.
+Fuente: [Ani Kannal, Solar Power Generation Data](https://www.kaggle.com/datasets/anikannal/solar-power-generation-data). Se utilizan exclusivamente los dos CSV de **Planta 1**. Los datos corresponden a India; el caso de aplicación es colombiano y requiere validación local antes de transferir resultados.
 
-La clasificación a 15 minutos apoya la identificación de candidatos a periodos de baja generación. No garantiza la duración de una ventana ni autoriza mantenimiento. Una clase baja no equivale a potencia cero o avería. Los registros incompletos se distinguen de los ceros físicos; no se imputan como baja generación.
+| Fuente | Registros | Uso |
+|---|---:|---|
+| `Plant_1_Generation_Data.csv` | 68778 | Potencia por inversor; 22 equipos |
+| `Plant_1_Weather_Sensor_Data.csv` | 3182 | Irradiación y temperaturas ambiente/módulo |
 
-Están disponibles `Plant_1_Generation_Data.csv` y `Plant_1_Weather_Sensor_Data.csv`, de [Solar Power Generation Data, Ani Kannal, Kaggle](https://www.kaggle.com/anikannal/solar-power-generation-data). El original `Proyecto_Generacion.ipynb` de Tabares se revisó y reprodujo sin modificarlo; la revisión y los aportes integrados se documentan dentro del notebook del equipo.
+Periodo: 15-may a 17-jun-2020, cada 15 minutos, **34 días y 3264 instantes esperados**. Se interpretan los formatos de fecha de cada archivo y se agrupa por planta/fecha. La unión sobre una rejilla completa conserva instantes ausentes y banderas de procedencia. `AC_OBSERVADA_KW` conserva sumas recibidas; `AC_PLANTA_KW` exige los **22 valores AC válidos**, para no confundir una suma parcial con la potencia de toda la planta.
 
-La clasificación compara clase mayoritaria, persistencia, logística, KNN y árbol, con una muestra común, corte por días (prueba desde 11-jun-2020) y cinco pliegues temporales. Los terciles se calculan de nuevo con el entrenamiento de cada pliegue; el escalado está en Pipeline. Incluye matrices por fila en porcentaje y conteos, reportes por clase, curvas de validación, explicación de los 21 vecinos del KNN y dos rutas completas del árbol con números de nodo.
+La producción nula sin irradiación es esperable. La auditoría separa **1333 ceros sin irradiación**, **54 con irradiación baja**, **207 instantes sin potencia completa** y **63 registros de inversores individuales en cero con sol**, estos últimos en 28 instantes y nueve equipos. No hubo ceros completos de planta por encima del umbral. Un registro ausente nunca se convierte en cero.
 
-La revisión añade postpoda del árbol con `ccp_alpha` elegido solo en CV sobre entrenamiento, además de la profundidad y el tamaño mínimo de hoja de la referencia. Se deja crecer el árbol y se compara su complejidad con la versión podada. El árbol completo se exporta a PDF vectorial para ampliar; las hojas no se fuerzan a tener impureza cero.
+El umbral de trabajo de la guía, **0.05 kW/m²**, se fijó antes de ajustar modelos. El filtro usa irradiación del objetivo para definir una **evaluación diurna retrospectiva**; no es un predictor futuro permitido. Operar requiere una activación conocida al emitir y nueva validación. No se interpolan objetivos ni predictores. Los candidatos IQR por hora (factor 3, límites aprendidos en train) se conservan sin atribuirles una falla. La mediana DC/AC **10.2202** se documenta como anomalía de escala; no se divide DC arbitrariamente por diez.
 
-El benchmark del 17-nov (`fb61bc3`) se conserva: 1.169 filas de entrenamiento y 310 de prueba. KNN fue seleccionado por validación (F1 macro medio 0,796), pero en prueba obtuvo 0,770 frente a 0,795 de persistencia. La postpoda figura como revisión exploratoria separada. Los siete días de prueba ya se consultaron en el avance: volver a evaluarlos no es una nueva prueba externa. No se cambia la selección mirando sus resultados; para confirmar mejoras hacen falta nuevos periodos.
+Se construyen rezagos **por fecha exacta**, antes de filtrar noches, a 15/30/60 minutos. La fila objetivo `s` se pronostica en `s−15 min`. Potencia/clima de `s`, DC, acumulados e identificadores se excluyen como predictores. Se comparan potencia a 15 min y hora; historia de potencia y hora; historia más los tres sensores pasados. La muestra común permite una comparación justa entre grupos.
 
-La discusión cuantifica la fiabilidad y cobertura de los avisos de nivel bajo, las discrepancias con generación real inferior a la anunciada y sus riesgos. Incluye límites, impactos, propuesta de piloto supervisado y autoauditoría con evidencias. La revisión humana y la comprensión de los tres integrantes permanecen pendientes de confirmar.
+Quedan **1479 filas**: **1169** de entrenamiento (27 días, hasta 10-jun) y **310** de prueba (7 días, desde 11-jun). Los terciles finales son **10320.260119 y 18331.648214 kW**: bajo ≤ primer corte, medio > primero y ≤ segundo, alto > segundo. Se recalculan dentro de cada entrenamiento de CV; prueba nunca define los cortes. Distribución train: 390/389/390; prueba: 114/129/67, en orden bajo/medio/alto.
 
-No se interpolan predictores ni objetivos. El umbral diurno de trabajo es 0,05 kW/m², tomado de la guía antes de ajustar modelos. Define una evaluación diurna retrospectiva, no una medición futura permitida como predictor. El notebook detalla qué filas se excluyen y verifica la disponibilidad temporal de cada rezago.
+## Modelos y resultados
 
-Al ejecutar se generan **solo localmente**, dentro de `datos/`:
+Las dos líneas base son clase mayoritaria (`DummyClassifier`) y persistencia de la clase anterior. Se comparan con logística, KNN y árbol. `TimeSeriesSplit(n_splits=5)` se aplica sobre días, con ventanas expansivas. Escalado de logística/KNN dentro de `Pipeline`, ajustado solo con train. Criterio previo de selección: **F1 macro medio de CV**; se informa también accuracy, precisión/recall/F1 por clase y kappa.
 
-- `Planta1_crudo_unificado.csv`: 3.264 instantes esperados, sumas observadas, clima, contadores y banderas de origen/calidad/ceros, sin filtrar ni rellenar huecos.
-- `Planta1_tabla_modelado.csv`: objetivos observados completos, predictores pasados, fecha de emisión, partición y nivel con los cortes de entrenamiento.
+Selección original por CV: KNN con **21 vecinos**, ponderación por distancia, potencia a 15/30/60 min y hora (F1 CV **0.7958**). Persistencia tuvo CV **0.7506**. Logística: C=10, potencia a 15 min y hora. Árbol de referencia: profundidad máxima 7, mínimo 5 por hoja, historia de potencia y hora.
 
-El contexto bibliográfico y las tres preguntas ya están incorporados. El informe IEEE se preparó el 21-nov en cinco páginas: `informe/Informe_Proyecto3_Planta1_IEEE.pdf`, con su fuente editable `.docx`. Incluye resumen de 197 palabras, cuatro términos, cuatro figuras, tabla con los seis métodos/configuraciones, discusión por pregunta, despliegue supervisado y diez referencias con enlaces. Las métricas se contrastaron con las exportadas por el notebook y las cinco páginas se revisaron visualmente.
+| Método | Accuracy | F1 macro | Kappa | F1 bajo | F1 medio | F1 alto |
+|---|---:|---:|---:|---:|---:|---:|
+| Clase mayoritaria | 0.216 | 0.118 | 0.000 | 0.000 | 0.000 | 0.355 |
+| Persistencia | 0.803 | 0.795 | 0.695 | 0.886 | 0.767 | 0.731 |
+| Logística | 0.790 | 0.782 | 0.675 | 0.877 | 0.752 | 0.716 |
+| KNN | 0.774 | 0.770 | 0.658 | 0.877 | 0.722 | 0.713 |
+| Árbol | 0.735 | 0.732 | 0.598 | 0.840 | 0.678 | 0.679 |
+| Árbol postpodado · revisión | 0.790 | 0.790 | 0.678 | 0.867 | 0.757 | 0.747 |
 
-Se aplicó una maquetación IEEE a dos columnas y las reglas de la guía. No se encontró identificada la plantilla específica del curso: queda pendiente cotejarla cuando esté disponible, junto con la revisión de las decisiones e interpretaciones por los tres integrantes. La auditoría dentro del notebook conserva el estado de su ejecución anterior a redactar el informe. Queda pendiente el ensayo del equipo. Los resultados simulados de las guías y los del procedimiento de Tabares no se copian como resultados del procedimiento corregido.
+La postpoda es una **revisión exploratoria**: alpha 0.01 se eligió en CV, con F1 0.7455; redujo el ajuste de 232 a seis hojas y de profundidad 15 a tres. No cambia el candidato seleccionado anteriormente ni convierte los siete días ya consultados en una prueba externa nueva. El historial de referencia del 17-nov (`fb61bc3`) se conserva.
 
-## Diapositivas y guion de sustentación
+### Respuestas al caso de O&M
 
-`presentacion/Sustentacion_Proyecto3_Planta1.pdf` contiene 12 láminas para el recorrido de doce minutos y tres de apoyo para preguntas. Las gráficas se adaptaron con los mismos datos y resultados del informe; la comparación distingue CV de prueba y conserva la postpoda como revisión exploratoria. La presentación editable se guardó en Spaces y está enlazada en el chat de preparación, con las tablas y notas del expositor editables.
+- **Calidad:** distinguir ceros físicos y telemetría incompleta evita fabricar periodos de baja generación. Los eventos individuales requieren estados y bitácoras para determinar su causa.
+- **Aporte del modelo:** persistencia acertó 249/310 y KNN 240/310. El error real medio/anunciado alto fue 18/129 (14.0 %) y 35/129 (27.1 %), respectivamente. Añadir clima cambió F1 CV en −0.020 KNN, +0.001 logística y −0.005 árbol; no hubo mejora uniforme.
+- **Riesgo:** KNN tuvo 53/310 instantes con real inferior al anunciado (17.1 %), frente a 31/310 de persistencia (10.0 %). Sus avisos bajos se cumplieron en 96/105 casos (precisión 91.4 %) y detectaron 96/114 bajos reales (recall 84.2 %). Son discrepancias de clase, no kWh perdidos o fallas confirmadas.
 
-El reparto es Isabella Londoño Lerma, láminas 1–4 (0:00–4:00); Miguel Ángel Tabares, 5–8 (4:00–8:00); Andrés Felipe Rivas, 9–12 (8:00–12:00). El tiempo total objetivo es 720 segundos, con 240 por persona. Debe comprobarse con un ensayo cronometrado.
+En un piloto, el operador comprobaría fechas, cobertura y entradas antes de mostrar el nivel siguiente. Si faltan entradas: **no evaluable**. Ante un aviso bajo, revisaría duración de la tarea, condiciones y seguridad. Ante real inferior al anunciado, contrastaría clima, inversores y bitácoras. Un modelo que usa potencia pasada puede adaptarse a una reducción sostenida: vigilar degradación requiere una referencia independiente.
 
-La versión `presentacion/Sustentacion_Proyecto3_Planta1.html` funciona sin internet y contiene 12 láminas principales y tres de apoyo. Abrirla en Chrome o Edge. Flechas para avanzar, N para notas y F para pantalla completa. El reloj inicia o pausa con un clic y reinicia con doble clic. La comparación permite alternar validación/prueba y la matriz alterna porcentajes/conteos. Las animaciones respetan la preferencia de movimiento reducido. El PDF conserva el formato de entrega del curso.
+## Instalación y ejecución
 
-`presentacion/Guion_Sustentacion_Proyecto3_Actualizado.pdf` reúne el reparto vigente, texto de cada intervención, tiempos por lámina, qué señalar, transiciones, diez preguntas de defensa y práctica de cambios en vivo. Su fuente editable es `Guion_Sustentacion_Proyecto3.docx`. El PDF sin sufijo conserva el reparto anterior. El guion tiene siete páginas y es material de preparación; no sustituye los tres productos finales solicitados para el ZIP. Las láminas A1–A3 se consultan únicamente durante las preguntas. Los tres integrantes deben comprender el proyecto completo y revisar lo que van a sustentar.
-
-## Ejecutar
-
-Abrir esta carpeta en VS Code y `notebooks/Proyecto3_Planta1.ipynb`. Elegir el kernel de `.venv`: **Python (Solar Planta 1)**. Ejecutar todas las celdas en orden.
-
-El entorno de este computador ya está instalado (Python 3.14.3). Para otro computador, después de clonar el repositorio:
-
-```powershell
-py -3.14 -m venv .venv
-.\.venv\Scripts\python.exe -m pip install -r requirements.txt
-.\.venv\Scripts\python.exe -m ipykernel install --prefix .venv --name solar-planta1 --display-name "Python (Solar Planta 1)"
-```
-
-Cada integrante descarga los dos CSV de Planta 1 y los coloca directamente en `datos/`, con sus nombres originales. El notebook usa rutas relativas. También se puede iniciar Jupyter desde la raíz con `.\.venv\Scripts\python.exe -m jupyter lab`.
-
-Para ejecutar el notebook fuera del repositorio, basta con ubicar los dos CSV junto a él o en una carpeta `datos/` cercana y seleccionar un entorno con las dependencias. La búsqueda no depende de `consigna/` ni de `requirements.txt`. `EXPORTAR=False` desactiva las figuras y tablas auxiliares; las dos tablas de datos se guardan en la carpeta local de datos. No se necesita acceso a Internet durante el análisis.
-
-Las figuras para el informe se generan directamente en PNG a 300 dpi y PDF vectorial; la tabla de resultados se exporta a JSON y LaTeX con las mismas cifras calculadas. El informe debe seleccionar 4–5 figuras relevantes, sin capturas del notebook. Estos archivos de apoyo no sustituyen los tres productos finales.
-
-## Colaboración y entrega
-
-Repositorio privado del equipo: [MekiahxAndres/proyecto3-solar-planta1](https://github.com/MekiahxAndres/proyecto3-solar-planta1). El propietario agregará después a los otros dos integrantes como colaboradores. Los CSV y `.venv` quedan fuera del repositorio.
-
-Para empezar en otro computador:
+Entorno verificado: **Python 3.14.3 en Windows**, con versiones fijadas en `requirements.txt`. No hace falta acceso a internet durante el análisis una vez instaladas dependencias y descargados los CSV.
 
 ```powershell
 git clone https://github.com/MekiahxAndres/proyecto3-solar-planta1.git
 cd proyecto3-solar-planta1
-git switch avance/eda-clima-modelado
+git switch main
+py -3.14 -m venv .venv
+.\.venv\Scripts\python.exe -m pip install -r requirements.txt
+.\.venv\Scripts\python.exe -m ipykernel install --prefix .venv --name solar-planta1 --display-name "Python (Solar Planta 1)"
+.\.venv\Scripts\python.exe -m jupyter lab
 ```
 
-Después, seguir los pasos de instalación y ubicar los CSV en `datos/`.
+Cada integrante descarga los dos CSV y los coloca en `datos/`, con sus nombres originales. Abrir `notebooks/Proyecto3_Planta1.ipynb`, seleccionar el kernel del entorno, reiniciar y ejecutar todas las celdas. También se puede ejecutar con:
 
-Entrega: 24 de noviembre de 2026, 11:59 p. m., ZIP `Proyecto3_Grupo_ApellidosMiembros.zip` con un notebook ejecutado, informe IEEE PDF de máximo cinco páginas y diapositivas PDF. Sin CSV. Sustentación: 25 de noviembre, 12 minutos y 8 de preguntas. El registro de uso de IA se conserva al final del notebook.
+```powershell
+.\.venv\Scripts\python.exe -m jupyter nbconvert --to notebook --execute --inplace --ExecutePreprocessor.kernel_name=solar-planta1 --ExecutePreprocessor.timeout=360 notebooks/Proyecto3_Planta1.ipynb
+```
 
-La configuración anterior se conserva fuera del proyecto, en `D:/Analitica de Datos/Respaldo_configuracion_2026-11-11/`.
+Para el notebook de entrega fuera del repositorio, ubicar los CSV junto a él o en una carpeta `datos/` cercana. Las rutas se resuelven desde la ubicación de ejecución. `EXPORTAR=False` omite figuras/tablas de apoyo; las dos tablas derivadas se guardan localmente junto a los datos. No hacen falta la consigna ni el README para ejecutar el análisis.
+
+Se generan localmente `datos/Planta1_crudo_unificado.csv` y `datos/Planta1_tabla_modelado.csv`. Las figuras para el informe se exportan en PNG 300 dpi/PDF vectorial; las métricas se guardan en `informe/figuras/tabla_resultados.json` y `.tex`. `evidencia_ejecucion.json` conserva tamaños, cortes, hashes y riesgos.
+
+## Auditoría final del 22 de noviembre
+
+| Requisito | Evidencia y estado |
+|---|---|
+| Tarea 1: contexto, física, PR y preguntas | Introducción del notebook/informe, fuentes primarias y P1–P3. No se calcula PR sin capacidad nominal validada. |
+| Tarea 2: unión, faltantes, ceros, escala y EDA | Rejilla, contadores, calidad, histogramas/cajas, clima, perfiles, correlaciones y clases. |
+| Tarea 3: modelos, ajuste e interpretación | Dos baselines, tres familias, 5 pliegues por días, escalado, train/prueba, reportes, matrices, coeficientes y rutas. |
+| Tarea 4: resultados y recomendación | Informe de 5 páginas, resumen de 197 palabras, 4 términos, tabla por clase, matrices, reglas, importancia e IAG. |
+| Ejecución | Notebook reiniciado y ejecutado: 52 celdas, 30 de código, 26 gráficos, cero errores de celda. |
+| Verificación independiente | Sumas por inversor, clima, rezagos, cortes, etiquetas y fecha de emisión contrastados por otra vía. Hashes originales intactos. Lectura portable comprobada. |
+| Sustentación | PDF/HTML revisados, notas y guion alineados; 12 principales y tres de apoyo. |
+| Git y entrega | CSV, entorno, ZIP y secretos excluidos. El ZIP de entrega contiene solo tres productos. |
+
+**Límites que permanecen:** una planta y 34 días, siete de prueba ya observados, exclusión de telemetría incompleta y activación diurna operativa aún sin validar. No se acreditan ahorros ni diagnóstico de fallas. Se aplicaron las reglas IEEE a dos columnas de la guía; la plantilla específica del curso «Formato presentación documentos» no se identificó y su cotejo queda pendiente. Los PDF genéricos encontrados de otros cursos no se consideran la plantilla oficial. El ensayo cronometrado, comprensión individual y revisión humana no se marcan como realizados por una comprobación automática.
+
+## Sustentación y colaboración
+
+| Integrante | Láminas | Tiempo |
+|---|---|---|
+| Isabella Londoño Lerma | 1–4 | 0:00–4:00 |
+| Miguel Ángel Tabares | 5–8 | 4:00–8:00 |
+| Andrés Felipe Rivas | 9–12 | 8:00–12:00 |
+
+Las láminas A1–A3 son apoyo para preguntas, fuera de los doce minutos. Todos deben poder explicar y modificar el notebook sin apoyo de IAG en la defensa. Usar la guía de gráficos para estudiar, el guion para ensayar y los PDF finales para entregar.
+
+La versión revisada se integra en `main`; `avance/eda-clima-modelado` conserva la preparación. Para nuevas contribuciones, crear una rama desde `main`, ejecutar el notebook y revisar el diff antes de integrar. Los colaboradores acceden al repositorio privado una vez el propietario los invite. No subir datos del dataset ni el entorno.
+
+## Entrega del curso
+
+Fecha: **24-nov-2026 a las 11:59 p. m.** Sustentación: **25-nov**, 12 minutos y 8 de preguntas.
+
+ZIP local: `Proyecto3_Grupo_Tabares_Londono_Rivas.zip`, con exactamente:
+
+1. `Proyecto3_Planta1.ipynb` ejecutado y con salidas.
+2. `Informe_Proyecto3_Planta1_IEEE.pdf` (máximo cinco páginas).
+3. `Sustentacion_Proyecto3_Planta1.pdf`.
+
+Sin CSV, entorno, Word, HTML, guion, figuras sueltas ni carpetas temporales dentro del ZIP. El paquete no se versiona y debe regenerarse si cambia uno de esos tres archivos. El propietario realiza el envío en la plataforma. Un ZIP preparado no equivale a una entrega ya enviada.
+
+El uso real de ChatGPT/Codex está declarado en el informe y en el registro del notebook. La responsabilidad de comprender, revisar y defender las decisiones corresponde a los integrantes.
