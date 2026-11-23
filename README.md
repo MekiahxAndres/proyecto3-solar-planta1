@@ -20,7 +20,7 @@ Anticipamos el nivel **bajo, medio o alto de la Planta 1 a 15 minutos**, con inf
 | [Guion editable](presentacion/Guion_Sustentacion_Proyecto3.docx) | Fuente Word con el mismo reparto |
 | [Guía de gráficos](presentacion/Guia_Defensa_Graficos.html) | Explicación de los 26 gráficos reales: ejes, unidades, colores, valores y lectura O&M |
 
-Descargar el HTML y abrirlo en Chrome o Edge. La vista de código de GitHub no ejecuta la presentación. Flechas para navegar, **N** para notas y **F** para pantalla completa. El reloj inicia/pausa con un clic y reinicia con doble clic. La tabla gráfica permite alternar CV/prueba; la matriz, porcentajes/conteos. La fuente editable de las láminas también está guardada en Spaces y enlazada en el chat de preparación.
+Descargar el HTML y abrirlo en Chrome o Edge. La vista de código de GitHub no ejecuta la presentación. Flechas para navegar, **N** para notas, **F** para pantalla completa y **E** para una explicación en tres pasos (qué muestra, qué significa, qué implica para O&M). El índice permite saltar a una lámina. El reloj inicia/pausa con un clic y reinicia con doble clic. La gráfica de irradiación/potencia reproduce los **1195 registros reales del EDA de entrenamiento**, con valores al pasar el cursor. La comparación alterna CV/prueba y resalta el mejor valor de la vista; la matriz alterna porcentajes/conteos y explica cada celda al seleccionarla. El árbol recorre paso a paso un acierto y un error reales. Las animaciones respetan movimiento reducido y no simulan producción ni cambian los datos. Las notas y el guion escriben las cantidades con cifras (por ejemplo, 1333, 0.795 y 91.4 %). La fuente editable de las láminas también está guardada en Spaces y enlazada en el chat de preparación.
 
 ## Organización
 
