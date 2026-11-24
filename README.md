@@ -20,7 +20,7 @@ Anticipamos el nivel **bajo, medio o alto de la Planta 1 a 15 minutos**, con inf
 | [Guion editable](presentacion/Guion_Sustentacion_Proyecto3.docx) | Fuente Word con el mismo reparto |
 | [Guía de gráficos](presentacion/Guia_Defensa_Graficos.html) | Explicación de los 26 gráficos reales: ejes, unidades, colores, valores y lectura O&M |
 
-Descargar el HTML y abrirlo en Chrome o Edge. La vista de código de GitHub no ejecuta la presentación. Flechas para navegar, **N** para notas, **F** para pantalla completa y **E** para una explicación en tres pasos (qué muestra, qué significa, qué implica para O&M). El índice permite saltar a una lámina. El reloj inicia/pausa con un clic y reinicia con doble clic. La gráfica de irradiación/potencia reproduce los **1195 registros reales del EDA de entrenamiento**, con valores al pasar el cursor. La comparación alterna CV/prueba y resalta el mejor valor de la vista; la matriz alterna porcentajes/conteos y explica cada celda al seleccionarla. El árbol recorre paso a paso un acierto y un error reales. Las animaciones respetan movimiento reducido y no simulan producción ni cambian los datos. Las notas y el guion escriben las cantidades con cifras (por ejemplo, 1333, 0.795 y 91.4 %). La fuente editable de las láminas también está guardada en Spaces y enlazada en el chat de preparación.
+La versión final para proyectar es el HTML, con PDF de entrega equivalente. Funciona sin internet. La interfaz muestra únicamente el contador de diapositivas: sin notas, explicaciones, índice ni cronómetro. Navegar con flechas, espacio o clic (zona izquierda: anterior; resto: siguiente), o deslizar en una pantalla táctil. F activa pantalla completa. Las animaciones revelan registros reales, comparaciones y reglas; respetan movimiento reducido. Los indicadores y las conclusiones están escritos en cada lámina para guiar la exposición. El guion y la guía de gráficos se consultan por separado para estudiar.
 
 ## Organización
 
@@ -106,7 +106,7 @@ Para el notebook de entrega fuera del repositorio, ubicar los CSV junto a él o 
 
 Se generan localmente `datos/Planta1_crudo_unificado.csv` y `datos/Planta1_tabla_modelado.csv`. Las figuras para el informe se exportan en PNG 300 dpi/PDF vectorial; las métricas se guardan en `informe/figuras/tabla_resultados.json` y `.tex`. `evidencia_ejecucion.json` conserva tamaños, cortes, hashes y riesgos.
 
-## Auditoría final del 22 de noviembre
+## Auditoría técnica del 22 de noviembre y cierre visual del 24
 
 | Requisito | Evidencia y estado |
 |---|---|
@@ -116,7 +116,7 @@ Se generan localmente `datos/Planta1_crudo_unificado.csv` y `datos/Planta1_tabla
 | Tarea 4: resultados y recomendación | Informe de 5 páginas, resumen de 197 palabras, 4 términos, tabla por clase, matrices, reglas, importancia e IAG. |
 | Ejecución | Notebook reiniciado y ejecutado: 52 celdas, 30 de código, 26 gráficos, cero errores de celda. |
 | Verificación independiente | Sumas por inversor, clima, rezagos, cortes, etiquetas y fecha de emisión contrastados por otra vía. Hashes originales intactos. Lectura portable comprobada. |
-| Sustentación | PDF/HTML revisados, notas y guion alineados; 12 principales y tres de apoyo. |
+| Sustentación | HTML final sin paneles de estudio, PDF equivalente y guion alineado; 12 principales y tres de apoyo. Animaciones con datos reales y controles únicamente por teclado, clic o gesto. |
 | Git y entrega | CSV, entorno, ZIP y secretos excluidos. El ZIP de entrega contiene solo tres productos. |
 
 **Límites que permanecen:** una planta y 34 días, siete de prueba ya observados, exclusión de telemetría incompleta y activación diurna operativa aún sin validar. No se acreditan ahorros ni diagnóstico de fallas. Se aplicaron las reglas IEEE a dos columnas de la guía; la plantilla específica del curso «Formato presentación documentos» no se identificó y su cotejo queda pendiente. Los PDF genéricos encontrados de otros cursos no se consideran la plantilla oficial. El ensayo cronometrado, comprensión individual y revisión humana no se marcan como realizados por una comprobación automática.
