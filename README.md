@@ -14,7 +14,7 @@ Anticipamos el nivel **bajo, medio o alto de la Planta 1 a 15 minutos**, con inf
 | [Notebook](notebooks/Proyecto3_Planta1.ipynb) | Las seis fases CRISP-DM, código, decisiones, tablas y 26 figuras ejecutadas |
 | [Informe IEEE](informe/Informe_Proyecto3_Planta1_IEEE.pdf) | Cinco páginas, resultados, discusión, recomendación, IAG y diez referencias |
 | [Informe editable](informe/Informe_Proyecto3_Planta1_IEEE.docx) | Fuente Word del informe |
-| [Diapositivas PDF](presentacion/Sustentacion_Proyecto3_Planta1.pdf) | 12 láminas principales y tres de apoyo para preguntas |
+| [Diapositivas PDF](presentacion/Sustentacion_Proyecto3_Planta1.pdf) | 12 láminas de contenido y una final de agradecimiento |
 | [Presentación HTML](presentacion/Sustentacion_Proyecto3_Planta1.html) | Versión interactiva autónoma, sin internet |
 | [Guion vigente](presentacion/Guion_Sustentacion_Proyecto3_Actualizado.pdf) | Tiempos, intervenciones, preguntas y práctica de cambios en vivo |
 | [Guion editable](presentacion/Guion_Sustentacion_Proyecto3.docx) | Fuente Word con el mismo reparto |
@@ -116,7 +116,7 @@ Se generan localmente `datos/Planta1_crudo_unificado.csv` y `datos/Planta1_tabla
 | Tarea 4: resultados y recomendación | Informe de 5 páginas, resumen de 197 palabras, 4 términos, tabla por clase, matrices, reglas, importancia e IAG. |
 | Ejecución | Notebook reiniciado y ejecutado: 52 celdas, 30 de código, 26 gráficos, cero errores de celda. |
 | Verificación independiente | Sumas por inversor, clima, rezagos, cortes, etiquetas y fecha de emisión contrastados por otra vía. Hashes originales intactos. Lectura portable comprobada. |
-| Sustentación | HTML final sin paneles de estudio, PDF equivalente y guion alineado; 12 principales y tres de apoyo. Animaciones con datos reales y controles únicamente por teclado, clic o gesto. |
+| Sustentación | HTML final sin paneles de estudio, PDF equivalente y guion alineado; 12 de contenido y una final de agradecimiento. Animaciones con datos reales y controles únicamente por teclado, clic o gesto. |
 | Git y entrega | CSV, entorno, ZIP y secretos excluidos. El ZIP de entrega contiene solo tres productos. |
 
 **Límites que permanecen:** una planta y 34 días, siete de prueba ya observados, exclusión de telemetría incompleta y activación diurna operativa aún sin validar. No se acreditan ahorros ni diagnóstico de fallas. Se aplicaron las reglas IEEE a dos columnas de la guía; la plantilla específica del curso «Formato presentación documentos» no se identificó y su cotejo queda pendiente. Los PDF genéricos encontrados de otros cursos no se consideran la plantilla oficial. El ensayo cronometrado, comprensión individual y revisión humana no se marcan como realizados por una comprobación automática.
@@ -129,7 +129,7 @@ Se generan localmente `datos/Planta1_crudo_unificado.csv` y `datos/Planta1_tabla
 | Miguel Ángel Tabares | 5–8 | 4:00–8:00 |
 | Andrés Felipe Rivas | 9–12 | 8:00–12:00 |
 
-Las láminas A1–A3 son apoyo para preguntas, fuera de los doce minutos. Todos deben poder explicar y modificar el notebook sin apoyo de IAG en la defensa. Usar la guía de gráficos para estudiar, el guion para ensayar y los PDF finales para entregar.
+La lámina 13 cierra con «Muchas gracias»; las 12 anteriores mantienen el recorrido de doce minutos. Todos deben poder explicar y modificar el notebook sin apoyo de IAG en la defensa. Usar la guía de gráficos para estudiar, el guion para ensayar y los PDF finales para entregar.
 
 La versión revisada se integra en `main`; `avance/eda-clima-modelado` conserva la preparación. Para nuevas contribuciones, crear una rama desde `main`, ejecutar el notebook y revisar el diff antes de integrar. Los colaboradores acceden al repositorio privado una vez el propietario los invite. No subir datos del dataset ni el entorno.
 
