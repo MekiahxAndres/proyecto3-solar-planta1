@@ -5,8 +5,6 @@ datos/*
 *.tsv
 *.parquet
 *.zip
-# Copia local anterior al cambio de reparto; usar el guion Actualizado.
-/presentacion/Guion_Sustentacion_Proyecto3.pdf
 
 # Entorno, secretos y temporales
 .venv/
@@ -26,3 +24,10 @@ __pycache__/
 Thumbs.db
 ~$*
 
+
+# Material local de preparación y exportaciones; no pertenece a la entrega.
+/.vscode/
+/informe/*
+!/informe/Informe_Proyecto3_Planta1_IEEE.pdf
+/presentacion/*
+!/presentacion/Sustentacion_Proyecto3_Planta1.html
